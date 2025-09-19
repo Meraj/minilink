@@ -14,8 +14,9 @@ type Rule struct {
 }
 
 type Route struct {
-	Default string `yaml:"default"`
-	Rules   []Rule `yaml:"rules"`
+	Default     string `yaml:"default"`
+	Passthrough bool   `yaml:"passthrough"`
+	Rules       []Rule `yaml:"rules"`
 }
 
 type Config struct {
@@ -49,6 +50,9 @@ func (c *Config) FindRoute(shortcode, queryString string) (string, bool) {
 		}
 		// Fall back to default if no rules match
 		if route.Default != "" {
+			if route.Passthrough && queryString != "" {
+				return route.Default + "?" + queryString, true
+			}
 			return route.Default, true
 		}
 	}
