@@ -1,0 +1,13 @@
+routes:
+  gh:
+    default: "https://github.com"
+    rules:
+      - query: "x=y"
+        url: "https://github.com/Meraj"
+        passthrough: false
+  gf:
+    default: "https://github.com"
+    rules:
+      - query: "x=y"
+        url: "https://github.com/Meraj"
+        passthrough: true
